@@ -5,7 +5,7 @@ import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--metrics_path', default=r'D:\Users\cemko\PycharmProjects\pointnet.pytorch\utils\PM files\Performance Metrics 1.txt', help='Path of the performance metrics file')
+parser.add_argument('--metrics_path', type=str, default=r'D:\Users\cemko\PycharmProjects\pointnet.pytorch\utils\PM_files\Performance Metrics 1.txt', help='Path of the performance metrics file')
 
 args = parser.parse_args()
 pm_path = args.metrics_path

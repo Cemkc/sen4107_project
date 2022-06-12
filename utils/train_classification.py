@@ -24,16 +24,15 @@ parser.add_argument('--dataset_type', type=str, default='shapenet', help="datase
 parser.add_argument('--feature_transform', action='store_true', help="use feature transform")
 
 
-pm_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + (r"/utils" + r"/PM files")
+pm_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + (r"/utils" + r"/PM_files" + r"/cls")
 if not os.path.exists(pm_path): 
-    print("ello")
     os.makedirs(pm_path)
 
 for i in range(150):
-    if(os.path.exists(pm_path + "//Performance Metrics {}.txt".format(i))):
+    if(os.path.exists(pm_path + "//Performance_Metrics_{}.txt".format(i))):
         continue
     else:
-        pm = open(pm_path + ("//Performance Metrics {}.txt".format(i)), "w")
+        pm = open(pm_path + ("//Performance_Metrics_{}.txt".format(i)), "w")
         break
     
 opt = parser.parse_args()

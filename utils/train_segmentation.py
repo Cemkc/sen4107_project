@@ -26,15 +26,15 @@ parser.add_argument('--dataset', type=str, required=True, help="dataset path")
 parser.add_argument('--class_choice', type=str, default='Chair', help="class_choice")
 parser.add_argument('--feature_transform', action='store_true', help="use feature transform")
 
-pm_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + (r"/utils" + r"/PM files" + r"/sgm")
+pm_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + (r"/utils" + r"/PM_files" + r"/sgm")
 if not os.path.exists(pm_path): 
     os.makedirs(pm_path)
 
 for i in range(150):
-    if(os.path.exists(pm_path + "//Performance Metrics {}.txt".format(i))):
+    if(os.path.exists(pm_path + "//Performance_Metrics_{}.txt".format(i))):
         continue
     else:
-        pm = open(pm_path + ("//Performance Metrics {}.txt".format(i)), "w")
+        pm = open(pm_path + ("//Performance_Metrics_{}.txt".format(i)), "w")
         break
     
 

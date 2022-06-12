@@ -7,6 +7,6 @@ shapenetcore_partanno_segmentation_benchmark_v0/
 .idea*
 cls/
 seg/
-PM Files/
+PM_Files/
 pointnet/notebook.py
 *.egg-info/
