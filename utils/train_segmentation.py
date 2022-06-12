@@ -26,6 +26,18 @@ parser.add_argument('--dataset', type=str, required=True, help="dataset path")
 parser.add_argument('--class_choice', type=str, default='Chair', help="class_choice")
 parser.add_argument('--feature_transform', action='store_true', help="use feature transform")
 
+pm_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + (r"/utils" + r"/PM files" + r"/sgm")
+if not os.path.exists(pm_path): 
+    os.makedirs(pm_path)
+
+for i in range(150):
+    if(os.path.exists(pm_path + "//Performance Metrics {}.txt".format(i))):
+        continue
+    else:
+        pm = open(pm_path + ("//Performance Metrics {}.txt".format(i)), "w")
+        break
+    
+
 opt = parser.parse_args()
 print(opt)
 
@@ -110,6 +122,7 @@ for epoch in range(opt.nepoch):
             loss = F.nll_loss(pred, target)
             pred_choice = pred.data.max(1)[1]
             correct = pred_choice.eq(target.data).cpu().sum()
+            pm.write('[%d: %d/%d] %s loss: %f accuracy: %f \n' % (epoch, i, num_batch, 'test', loss.item(), correct.item()/float(opt.batchSize)))
             print('[%d: %d/%d] %s loss: %f accuracy: %f' % (epoch, i, num_batch, blue('test'), loss.item(), correct.item()/float(opt.batchSize * 2500)))
 
     torch.save(classifier.state_dict(), '%s/seg_model_%s_%d.pth' % (opt.outf, opt.class_choice, epoch))

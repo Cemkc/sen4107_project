@@ -30,20 +30,22 @@ test_dataset = ShapeNetDataset(
 testdataloader = torch.utils.data.DataLoader(
     test_dataset, batch_size=32, shuffle=True)
 
-classifier = PointNetCls(k=len(test_dataset.classes))
-classifier.cuda()
-classifier.load_state_dict(torch.load(opt.model))
-classifier.eval()
+print(test_dataset.classes)
+
+# classifier = PointNetCls(k=len(test_dataset.classes))
+# classifier.cpu()
+# classifier.load_state_dict(torch.load(opt.model))
+# classifier.eval()
 
 
-for i, data in enumerate(testdataloader, 0):
-    points, target = data
-    points, target = Variable(points), Variable(target[:, 0])
-    points = points.transpose(2, 1)
-    points, target = points.cuda(), target.cuda()
-    pred, _, _ = classifier(points)
-    loss = F.nll_loss(pred, target)
+# for i, data in enumerate(testdataloader, 0):
+#     points, target = data
+#     points, target = Variable(points), Variable(target[:, 0])
+#     points = points.transpose(2, 1)
+#     points, target = points.cuda(), target.cuda()
+#     pred, _, _ = classifier(points)
+#     loss = F.nll_loss(pred, target)
 
-    pred_choice = pred.data.max(1)[1]
-    correct = pred_choice.eq(target.data).cpu().sum()
-    print('i:%d  loss: %f accuracy: %f' % (i, loss.data.item(), correct / float(32)))
+#     pred_choice = pred.data.max(1)[1]
+#     correct = pred_choice.eq(target.data).cpu().sum()
+#     print('i:%d  loss: %f accuracy: %f' % (i, loss.data.item(), correct / float(32)))
